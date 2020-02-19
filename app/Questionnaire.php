@@ -2,11 +2,23 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Questionnaire extends Model
 {
     protected $guarded = [];
+
+    public function path()
+    {
+        return route('questionnaire.show', $this);
+    }
+
+    public function publicPath()
+    {
+//        return route('survey.questionnaire.show', $this);
+        return url('/surveys/' . $this->id. '-' . Str::slug($this->title));
+    }
 
     public function user()
     {
